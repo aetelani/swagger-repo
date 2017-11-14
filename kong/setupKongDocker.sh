@@ -35,7 +35,7 @@ docker run -d --name kong \
 #
 sleep 10
 #docker run --name kong-dashboard -d -p 8080:8080 pgbi/kong-dashboard:v2
-docker run -p 1337:1337 \
-    --link kong:kong \
-    --name konga \
-    pantsel/konga
+#docker run -p 1337:1337 \
+#    --link kong:kong \
+#    --name konga \
+#    pantsel/konga

@@ -107,7 +107,7 @@ Now that Kong has all the data configured, we can start our application using th
 
 Export the environment variables used by the Node.js application:
 
-or use the custom `../kong_scrips/oauth2_ui_flow.sh` script. Not in this repository
+or use the custom `oauth2_ui_flow.sh`
 
 ```shell
 export PROVISION_KEY="2ef290c575cc46eec61947aa9f1e67d3"
