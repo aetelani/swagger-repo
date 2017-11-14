@@ -72,4 +72,16 @@ http -v :8001/apis/chain/plugins \
 
 ##### Testing
 echo Testing :8000/chain endpoint
-http -v :8000/chain
+http -v :8000/ Host:mock.dev
+
+http -v :800/oauth2/token \
+    Hosts:mock.dev \
+#    Authorization:Basic czZCakmlkkE0MzpnWDFmQmF0M2JW \
+    client_id=chain-id \
+    client_secret=chain-secret \
+    grant_type=password \
+    scope=email \
+    provision_key=XXX \
+    authenticated_userid=chain-user \
+    username=chain-user \
+    password=chain-secret
