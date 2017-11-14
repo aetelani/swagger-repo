@@ -74,7 +74,10 @@ http -v :8001/apis/chain/plugins \
 echo Testing :8000/chain endpoint
 http -v :8000/ Host:mock.dev
 
-http -v :800/oauth2/token \
+http -v :8000/ Host:mock.dev apikey=youshallpass
+
+
+http -v :8000/oauth2/token \
     Hosts:mock.dev \
 #    Authorization:Basic czZCakmlkkE0MzpnWDFmQmF0M2JW \
     client_id=chain-id \
