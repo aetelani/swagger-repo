@@ -88,6 +88,9 @@ function authorize(client_id, response_type, scope, callback) {
       authenticated_userid: "userid123" // Hard-coding this value (it should be the logged-in user ID)
     }
   }, function(error, response, body) {
+	  console.log("error:"); console.log(error);
+//	  console.log("response:"); console.log(response);
+	  console.log("body:"); console.log(body);
     callback(JSON.parse(body).redirect_uri);
   });
 }
