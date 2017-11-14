@@ -24,9 +24,16 @@ echo Add group to consumer
 http -v :8001/consumers/chain-user/acls \
    group=chain-group
    
-echo Create Key-auth plugin to user
+echo Create Key-auth plugin to consumer
 http -v :8001/consumers/chain-user/key-auth  \
    key=youshallpass
+
+echo Create Oauth2 credentials to consumer
+http :8001/consumers/chain-user/oauth2 \
+    "name=Chain%20Application" \
+    "client_id=chain-id" \
+    "client_secret=chain-secret" \
+    "redirect_uri=http://mockbin.org"
 
 # lets wait for a couple sec to flush
 sleep 5
