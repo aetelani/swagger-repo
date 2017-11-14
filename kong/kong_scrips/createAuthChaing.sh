@@ -85,3 +85,9 @@ http -v :800/oauth2/token \
     authenticated_userid=chain-user \
     username=chain-user \
     password=chain-secret
+
+http :8000/oauth2/token \
+    --data "grant_type=refresh_token" \
+    --data "client_id=chain-id" \
+    --data "client_secret=chain-secret" \
+    --data "refresh_token=XXX"
