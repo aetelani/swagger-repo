@@ -13,6 +13,8 @@ This project is made of two main files:
 
 # Installing dependencies
 
+# install HTTPie
+
 Execute
 
 ```shell
@@ -28,20 +30,20 @@ To run this project, execute the following operations.
 * Let's add a simple test API:
 
 ```shell
-curl -d "name=cats" \
-     -d "uris=/cats" \
-     -d "upstream_url=http://mockbin.org/" \
-     http://127.0.0.1:8001/apis/
+http :8001/apis/ \
+	name=cats \
+	uris=/cats \
+	upstream_url=http://mockbin.org/
 ```
 
 * Let's add the OAuth 2.0 plugin, with three available scopes:
 
 ```shell
-curl -d "name=oauth2" \
-     -d "config.scopes=email, phone, address" \
-     -d "config.mandatory_scope=true" \
-     -d "config.enable_authorization_code=true" \
-     http://127.0.0.1:8001/apis/cats/plugins/
+http :8001/apis/cats/plugins/ \
+	name=oauth2 \
+	config.scopes=email, phone, address \
+	config.mandatory_scope=true \
+	config.enable_authorization_code=true
 ```
 
 This will output a response including an auto-generated `provision_key` that we need to use later:
@@ -73,16 +75,16 @@ The `provision_key` will be sent by the web application when communicating with 
 * Let's create a Kong consumer (called `thefosk`):
 
 ```shell
-curl -d "username=thefosk" \
-     http://127.0.0.1:8001/consumers/
+http :8001/consumers/ \
+	username=thefosk
 ```
 
 * And the first OAuth 2.0 client application called `Hello World App`:
 
 ```shell
-curl -d "name=Hello World App" \
-     -d "redirect_uri=http://getkong.org/" \
-     http://127.0.0.1:8001/consumers/thefosk/oauth2/
+http :8001/consumers/thefosk/oauth2/ \
+	name="Hello World App" \
+    redirect_uri=http://mockbin.org/request
 ```
 
 That outputs the following response, including the `client_id` and `client_secret` that we will use later:
@@ -94,7 +96,7 @@ That outputs the following response, including the `client_id` and `client_secre
     "id": "7ce2f90c-3ec5-4d93-cd62-3d42eb6f9b64",
     "name": "Hello World App",
     "created_at": 1435783376000,
-    "redirect_uri": "http://getkong.org/",
+    "redirect_uri": "http://mockbin.org/request",
     "client_secret": "efbc9e1f2bcc4968c988ef5b839dd5a4"
 }
 ```
@@ -104,6 +106,8 @@ That outputs the following response, including the `client_id` and `client_secre
 Now that Kong has all the data configured, we can start our application using the `provision_key` that has been returned when we added the plugin.
 
 Export the environment variables used by the Node.js application:
+
+or use the custom `../kong_scrips/oauth2_ui_flow.sh` script. Not in this repository
 
 ```shell
 export PROVISION_KEY="2ef290c575cc46eec61947aa9f1e67d3"
@@ -143,7 +147,7 @@ With your browser, go to `http://127.0.0.1:3000/authorize?response_type=code&sco
 After clicking the "Authorize" button, you should be redirected to the `redirect_uri` we set up before with a `code` parameter in the querystring, like:
 
 ```
-http://getkong.org/?code=ad286cf6694d40aac06eff2797b7208d
+http://mockbin.org/request?code=ad286cf6694d40aac06eff2797b7208d
 ```
 
 For testing purposes we set the `redirect_uri` to `http://getkong.org`, but in production this will be an URL that the client application will be able to read to parse the code and exchange it with an access token.
@@ -155,11 +159,12 @@ Done! Now the client application has a `code` that it can use later on to reques
 To retrieve an `access_token` you can now execute the following request:
 
 ```shell
-curl https://127.0.0.1:8443/oauth2/token \
-     -H "Host: test.com" \
-     -d "grant_type=authorization_code" \
-     -d "client_id=318f98be1453427bc2937fceab9811bd" \
-     -d "client_secret=efbc9e1f2bcc4968c988ef5b839dd5a4" \
-     -d "redirect_uri=http://getkong.org/" \
-     -d "code=ad286cf6694d40aac06eff2797b7208d" --insecure
+http :8443/oauth2/token \
+    Host:test.com \
+    grant_type=authorization_code \
+    client_id=318f98be1453427bc2937fceab9811bd \
+    client_secret=efbc9e1f2bcc4968c988ef5b839dd5a4 \
+    redirect_uri=http://mockbin.org/" \
+    code=ad286cf6694d40aac06eff2797b7208d \
+    --insecure
 ```
