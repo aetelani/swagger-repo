@@ -160,11 +160,12 @@ To retrieve an `access_token` you can now execute the following request:
 
 ```shell
 http :8443/oauth2/token \
-    Host:test.com \
+    Host:mock.dev \
     grant_type=authorization_code \
-    client_id=318f98be1453427bc2937fceab9811bd \
-    client_secret=efbc9e1f2bcc4968c988ef5b839dd5a4 \
-    redirect_uri=http://mockbin.org/" \
-    code=ad286cf6694d40aac06eff2797b7208d \
-    --insecure
+    client_id=$CLIENT_ID \
+    client_secret=$CLIENT_SECRET \
+    redirect_uri=http://mockbin.org/request" \
+    code=$CODE \
+    --verify=no \
+    -v
 ```

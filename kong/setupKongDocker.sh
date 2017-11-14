@@ -11,7 +11,7 @@ docker run -d --name kong-database \
                 postgres:9.4
 
 # Wait database to sgtart
-sleep 10
+sleep 5 
 docker run --rm \
     --link kong-database:kong-database \
     -e "KONG_DATABASE=postgres" \
@@ -20,7 +20,7 @@ docker run --rm \
     kong kong migrations up
 
 #
-sleep 10
+sleep 1
 docker run -d --name kong \
     --link kong-database:kong-database \
     -e "KONG_DATABASE=postgres" \
@@ -33,7 +33,7 @@ docker run -d --name kong \
     kong
 
 #
-sleep 10
+#sleep 10
 #docker run --name kong-dashboard -d -p 8080:8080 pgbi/kong-dashboard:v2
 #docker run -p 1337:1337 \
 #    --link kong:kong \

@@ -14,7 +14,7 @@ echo Create setup: API and consumer
 http -v :8001/apis \
    name=chain \
    hosts=mock.dev \
-   upstream_url=http://mockbin.org
+   upstream_url=http://example.com/
 
 echo Create consumer
 http -v :8001/consumers \
@@ -30,10 +30,10 @@ http -v :8001/consumers/chain-user/key-auth  \
 
 echo Create Oauth2 credentials to consumer
 http :8001/consumers/chain-user/oauth2 \
-    "name=Chain%20Application" \
-    "client_id=chain-id" \
-    "client_secret=chain-secret" \
-    "redirect_uri=http://mockbin.org"
+    name=ChainApplication \
+    client_id=chain-id \
+    client_secret=chain-secret \
+    redirect_uri=http://mockbin.org/request
 
 # lets wait for a couple sec to flush
 sleep 5
@@ -65,32 +65,33 @@ echo Create Oauth2 for user grants for application with scopes
 http -v :8001/apis/chain/plugins \
    name=oauth2 \
    config.enable_password_grant=true \
-   config.scopes=email
-##   config.enable_authorization_code=true
-##   config.mandatory_scope=true
+   config.scopes=email \
+   config.enable_authorization_code=true \
+   config.mandatory_scope=true
 
 
 ##### Testing
 echo Testing :8000/chain endpoint
 http -v :8000/ Host:mock.dev
 
-http -v :8000/ Host:mock.dev apikey=youshallpass
+http -v :8000/ Host:mock.dev \
+    apikey=youshallpass
 
 
-http -v :8000/oauth2/token \
-    Hosts:mock.dev \
+#http -v :8000/oauth2/token \
+#    Hosts:mock.dev \
 #    Authorization:Basic czZCakmlkkE0MzpnWDFmQmF0M2JW \
-    client_id=chain-id \
-    client_secret=chain-secret \
-    grant_type=password \
-    scope=email \
-    provision_key=XXX \
-    authenticated_userid=chain-user \
-    username=chain-user \
-    password=chain-secret
+#    client_id=chain-id \
+#    client_secret=chain-secret \
+#    grant_type=password \
+#    scope=email \
+#    provision_key=XXX \
+#    authenticated_userid=chain-user \
+#    username=chain-user \
+#    password=chain-secret
 
-http :8000/oauth2/token \
-    --data "grant_type=refresh_token" \
-    --data "client_id=chain-id" \
-    --data "client_secret=chain-secret" \
-    --data "refresh_token=XXX"
+#http :8000/oauth2/token \
+#    --data "grant_type=refresh_token" \
+#    --data "client_id=chain-id" \
+#    --data "client_secret=chain-secret" \
+#    --data "refresh_token=XXX"
