@@ -47,8 +47,9 @@ echo Node listening port $LISTEN_PORT
 # Shortcut to AuthZ page
 echo "firefox \"localhost:3301/authorize?response_type=code&scope=email%20address%20phone&client_id=$CLIENT_ID\"" > gotoAuthzPage.sh
 
+#export CODE=$(http  http://mockbin.org/request?code=3MDW3e6gEe1ZLXLjHGiwemeYfoMELCBk | jq -r ".queryString.code")
 # Get access token with tbd exported $CODE
-echo "http -v --verify=no https://127.0.0.1:8443/oauth2/token Host:mock.dev grant_type=authorization_code client_id=$CLIENT_ID client_secret=$CLIENT_SECRET redirect_uri=http://mockbin.org/request code=\$CODE" > getRefreshToken.sh
+echo "http -v --verify=no https://127.0.0.1:8443/poc/oauth2/token grant_type=authorization_code client_id=$CLIENT_ID client_secret=$CLIENT_SECRET redirect_uri=http://mockbin.org/request code=\$CODE" > getRefreshToken.sh
 
 echo Ready steady Go...
 node app.js

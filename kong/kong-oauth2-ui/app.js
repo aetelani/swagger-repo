@@ -133,6 +133,14 @@ app.get("/", function(req, res) {
   res.render('index');
 });
 
+/*
+  Renew token
+ */
+app.get("/renew", function(req, res) {
+  console.log("code:" + url.parse(req.url).code);
+  // do post here with code
+});
+
 app.listen(LISTEN_PORT);
 
 console.log("Running at Port " + LISTEN_PORT);
