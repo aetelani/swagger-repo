@@ -21,7 +21,7 @@ docker run --rm \
 
 #
 sleep 1
-docker run -d --name kong \
+docker run -h kong -d --name kong \
     --link kong-database:kong-database \
     -e "KONG_DATABASE=postgres" \
     -e "KONG_CASSANDRA_CONTACT_POINTS=kong-database" \
