@@ -156,8 +156,6 @@ app.get("/access-token", function(req, res) {
   // do post here with code
   if (!!requestCode) {
 	  res.send("code found: " + requestCode);
-	  //https://127.0.0.1:8443/poc/oauth2/token grant_type=authorization_code client_id=$CLIENT_ID client_secret=$CLIENT_SECRET redirect_uri=http://mockbin.org/request code=\$CODE
-	   // /*
 	   const theRequest = {
 		   url: 'https://127.0.0.1:8443/poc/oauth2/token',
 		   form : {
@@ -177,7 +175,6 @@ app.get("/access-token", function(req, res) {
 			   //console.log(response);
 		   }
 	})
-	// */
   } else {
 	  res.status(400).send("Code NOT found");
   }
