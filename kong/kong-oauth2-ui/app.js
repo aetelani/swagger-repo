@@ -35,6 +35,8 @@ var PROVISION_KEY = load_env_variable("PROVISION_KEY");
 var CLIENT_ID = load_env_variable("CLIENT_ID");
 var CLIENT_SECRET = load_env_variable("CLIENT_SECRET");
 
+// Grant type for the flow
+var GRANT_TYPE = load_env_variable("GRANT_TYPE");
 /*
   Redirect Address from env
 */
@@ -147,8 +149,7 @@ app.get("/", function(req, res) {
 });
 
 /*
-  Client
-  get access token
+  get access and refresh tokens for 3 legged
  */
 app.get("/access-token", function(req, res) {
   const requestCode = req.query.code;
@@ -178,6 +179,37 @@ app.get("/access-token", function(req, res) {
   } else {
 	  res.status(400).send("Code NOT found");
   }
+});
+
+/*
+  get access and refresh tokens for client flow
+ */
+app.get("/access-token", function(req, res) {
+	const theRequest = {
+		url: KONG_API + API_PATH + '/oauth2/token',
+		form : {
+		   grant_type: GRANT_TYPE,
+		   client_id: CLIENT_ID,
+		   client_secret: CLIENT_SECRET,
+		   redirect_uri: REDIRECT_ADDRESS
+		}};
+	request.post(theRequest,
+		function (error, response, body) {
+			if (!error && response.statusCode == 200) {
+				console.log(body) // Print the body
+			} else {
+				console.log(error);
+				console.log(body);
+				//console.log(response);
+			}
+		})
+});
+
+/*
+  Client flow redirect end-point
+*/
+app.get("/client-flow", function(req, res) {
+	res.status(200).send('Congratulations of completing OAUTH2 client flow');
 });
 
 app.listen(LISTEN_PORT);
