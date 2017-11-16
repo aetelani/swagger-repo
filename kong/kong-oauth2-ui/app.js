@@ -1,3 +1,5 @@
+// just for mocking workflow puproses.
+
 var request    = require('request');
 var url        = require('url');
 var bodyParser = require('body-parser');
@@ -26,6 +28,17 @@ function load_env_variable(name) {
   after being added to the API
 */
 var PROVISION_KEY = load_env_variable("PROVISION_KEY");
+
+/*
+  Client credentials from env
+*/
+var CLIENT_ID = load_env_variable("CLIENT_ID");
+var CLIENT_SECRET = load_env_variable("CLIENT_SECRET");
+
+/*
+  Redirect Address from env
+*/
+var REDIRECT_ADDRESS = load_env_variable("REDIRECT_ADDRESS");
 
 /*
   URLs to Kong
@@ -134,11 +147,40 @@ app.get("/", function(req, res) {
 });
 
 /*
-  Renew token
+  Client
+  get access token
  */
-app.get("/renew", function(req, res) {
-  console.log("code:" + url.parse(req.url).code);
+app.get("/access-token", function(req, res) {
+  const requestCode = req.query.code;
+  console.log("code:" + requestCode);
   // do post here with code
+  if (!!requestCode) {
+	  res.send("code found: " + requestCode);
+	  //https://127.0.0.1:8443/poc/oauth2/token grant_type=authorization_code client_id=$CLIENT_ID client_secret=$CLIENT_SECRET redirect_uri=http://mockbin.org/request code=\$CODE
+	   // /*
+	   const theRequest = {
+		   url: 'https://127.0.0.1:8443/poc/oauth2/token',
+		   form : {
+			   grant_type: 'authorization_code',
+			   client_id: CLIENT_ID,
+			   client_secret: CLIENT_SECRET,
+			   redirect_uri: REDIRECT_ADDRESS,
+			   code: requestCode
+		   }};
+	   request.post(theRequest,
+		function (error, response, body) {
+           if (!error && response.statusCode == 200) {
+             console.log(body) // Print the body
+           } else {
+			   console.log(error);
+			   console.log(body);
+			   //console.log(response);
+		   }
+	})
+	// */
+  } else {
+	  res.status(400).send("Code NOT found");
+  }
 });
 
 app.listen(LISTEN_PORT);
