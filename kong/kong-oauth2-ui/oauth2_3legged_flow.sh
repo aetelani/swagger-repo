@@ -18,11 +18,12 @@ export SCOPES="{ \
   \"phone\": \"Grant permissions to read your mobile phone number\" \
 }"
 export REDIRECT_ADDRESS="http://\${KONGIP}:\${LISTEN_PORT}/access-token/"
+export UPSTREAM_URL=http://mockbin.org/request
 EOF
 
 . ./env
 
-http :8001/apis name=poc uris=${API_PATH} upstream_url=http://mockbin.org/request
+http :8001/apis name=poc uris=${API_PATH} upstream_url=${UPSTREAM_URL}
 
 http :8001/apis${API_PATH}/plugins/ \
 	name=oauth2 \
