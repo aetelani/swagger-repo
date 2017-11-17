@@ -3,6 +3,7 @@
 # Mocking client OAUTH2 flow
 
 cat <<EOF > env
+export ECHOIP=echo
 export KONGIP=kong
 export CONSUMER=poc
 export PROVISION_KEY=PoC
@@ -13,7 +14,8 @@ export KONG_API="https://\${KONGIP}:8443"
 export API_PATH="/poc"
 export GRANT_TYPE=client_credentials
 export LISTEN_PORT=3301
-export REDIRECT_ADDRESS="http://\${KONGIP}:\${LISTEN_PORT}/client-flow/"
+export REDIRECT_ADDRESS="http://\${KONGIP}:\${LISTEN_PORT}/client-flow/" # Not needed in client flow
+export UPSTREAM_URL=http://mockbin.org/request
 
 # not used
 export SCOPES="{ \
@@ -25,7 +27,7 @@ EOF
 
 . ./env
 
-http :8001/apis name=poc uris=${API_PATH} upstream_url=${REDIRECT_ADDRESS}
+http :8001/apis name=poc uris=${API_PATH} upstream_url=${UPSTREAM_URL}
 
 http :8001/apis${API_PATH}/plugins/ \
 	name=oauth2 \

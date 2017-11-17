@@ -1,7 +1,7 @@
 
 # Stop and remove old kong containers
-docker stop kong-dashboard kong kong-database
-docker rm -v kong-dashboard kong kong-database
+docker stop kong kong-database # echo kong-dashboard
+docker rm -v kong kong-database # echo kong-dashboard
 
 #
 docker run -d --name kong-database \
@@ -10,7 +10,9 @@ docker run -d --name kong-database \
                 -e "POSTGRES_DB=kong" \
                 postgres:9.4
 
-# Wait database to sgtart
+# docker run -h echo --name echo -d -p 8080:8080  brndnmtthws/nginx-echo-headers
+
+# Wait database to start
 sleep 5 
 docker run --rm \
     --link kong-database:kong-database \
@@ -23,6 +25,7 @@ docker run --rm \
 sleep 1
 docker run -h kong -d --name kong \
     --link kong-database:kong-database \
+    --link echo:echo \
     -e "KONG_DATABASE=postgres" \
     -e "KONG_CASSANDRA_CONTACT_POINTS=kong-database" \
     -e "KONG_PG_HOST=kong-database" \
