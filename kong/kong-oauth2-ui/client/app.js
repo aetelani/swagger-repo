@@ -1,15 +1,21 @@
 // just for mocking workflow puproses.
 
+var express    = require("express");
 var request    = require('request');
 //var bodyParser = require('body-parser');
 var nJwt = require('njwt');
 var secureRandom = require('secure-random');
-var express    = require("express");
 var redisClass = require("redis");
 
 const LISTEN_PORT = 3000;
+const REDIS_PORT = 6378;
+const REDIS_HOST = 'poc-redis';
 
-const redis = redisClass.createClient(6379, 'poc-redis');
+const redis = redisClass.createClient(REDIS_PORT, REDIS_HOST);
+
+redis.on('connect', function() {
+    console.log('redis connected');
+});
 
 const app	= express();
 
@@ -24,7 +30,6 @@ const claims = {
 }
 
 var jwt = nJwt.create(claims,signingKey);
-
 
 // Accept every SSL certificate
 process.env.NODE_TLS_REJECT_UNAUTHORIZED = "0";
