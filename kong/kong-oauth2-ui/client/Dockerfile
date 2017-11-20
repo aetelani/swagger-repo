@@ -14,7 +14,7 @@ COPY package*.json ./
 RUN npm install
 
 # Bundle app source
-COPY views app.js ./
+COPY app.js ./
+COPY views ./views/
 
-EXPOSE 3301
 CMD [ "npm", "start" ]
