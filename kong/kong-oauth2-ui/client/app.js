@@ -1,16 +1,16 @@
 // just for mocking workflow puproses.
 
 var request    = require('request');
-//var url        = require('url');
 //var bodyParser = require('body-parser');
 var nJwt = require('njwt');
 var secureRandom = require('secure-random');
 var express    = require("express");
-var redis = require("redis"),
+var redisClass = require("redis");
 
 const LISTEN_PORT = 3000;
 
-const redis = redis.createClient();
+const redis = redisClass.createClient(6379, 'poc-redis');
+
 const app	= express();
 
 app.set('view engine', 'pug');
@@ -35,7 +35,7 @@ app.get("/", function(req, res) {
 });
 
 
-// send JWT to poc api
+// send JWT to poc api and pipe result back
 app.get("/send-jwt", function(req, res) {
 	console.log('got request /send-jwt');
 	request({
