@@ -17,6 +17,7 @@
     "pug": "~2.0.0-rc.4",
     "redis": "^2.8.0",
     "request": "~2.83.0",
-    "secure-random": "^1.1.1"
+    "secure-random": "^1.1.1",
+    "uuid": "^3.1.0"
   }
 }
