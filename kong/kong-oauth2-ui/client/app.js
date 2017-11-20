@@ -6,9 +6,12 @@ var request    = require('request');
 var nJwt = require('njwt');
 var secureRandom = require('secure-random');
 var express    = require("express");
+var redis = require("redis"),
+
 const LISTEN_PORT = 3000;
 
-const app        = express();
+const redis = redis.createClient();
+const app	= express();
 
 app.set('view engine', 'pug');
 
