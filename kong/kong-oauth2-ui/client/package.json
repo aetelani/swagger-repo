@@ -1,0 +1,21 @@
+{
+  "name": "poc-jwt-client",
+  "description": "Simple Kong JWT client",
+  "license": "MIT",
+  "version": "0.0.1",
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/aetelani/kong-oauth2-hello-world/client"
+  },
+  "scripts": {
+    "start": "node app.js"
+  },
+  "dependencies": {
+    "body-parser": "~1.18.2",
+    "express": "~4.16.2",
+    "njwt": "^0.4.0",
+    "pug": "~2.0.0-rc.4",
+    "request": "~2.83.0",
+    "secure-random": "^1.1.1"
+  }
+}
