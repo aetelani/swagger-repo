@@ -13,6 +13,9 @@ COPY package*.json ./
 
 RUN npm install
 
+# Fore reloading node DEV only
+RUN npm install -g nodemon
+
 # Bundle app source
 COPY app.js ./
 COPY views ./views/

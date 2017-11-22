@@ -65,11 +65,17 @@ app.get("/send-jwt", function(req, res) {
 	redis.hmset(token, 'claims', bson.serialize(claims), 'key', signingKey);
 
 	request({
-//		uri: "http://localhost:8000/poc",
-		uri: "http://mockbin.org/request",
+		uri: "http://localhost:8000/poc",
+//		uri: "http://mockbin.org/request",
 		headers: {
 			'Hosts': 'poc',
-		}
+//			'Authorization: Bearer ' + token,
+		},
+		forms: {
+			'access_token': token,
+		},
+		qs: {
+		},
 	},	function (error, response, body) {
 			console.log('error:', error);
 			console.log('statusCode:', response && response.statusCode);
@@ -77,5 +83,5 @@ app.get("/send-jwt", function(req, res) {
 	}).pipe(res);
 });
 
-// Listener at LISTEN_PRT
+// Listener at LISTEN_PORT
 app.listen(LISTEN_PORT);
