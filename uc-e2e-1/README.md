@@ -6,3 +6,5 @@
 YahooWeatherAPI: https://rapidapi.com/package/YahooWeatherAPI/functions/getWeatherForecast
 BestWeatherAPI: https://app.swaggerhub.com/apis/arebest/BestWeatherAPI/
 Ask access to *BestWeatherAPI* to see the API. It's not public at the moment.
+
+uc-e2e-1/**swagger-repo** directory holds the *BestWeatherAPI* swagger files pushed from *swaggerhub*
