@@ -4,20 +4,24 @@ info:
   description: "Best Weather API\n"
   version: "1.0.2"
   title: "Best Weather API"
-host: "virtserver.swaggerhub.com"
-basePath: "/arebest/BestWeatherAPI/1.0.1"
 schemes:
 - "https"
 - "http"
 paths:
-  /weather:
+  /weather/{location}:
     get:
       summary: "Get the Weather"
       description: "Get the Weather from wherever you want"
-      operationId: "weatherGET"
-      parameters: []
+      operationId: "tre"
+      parameters:
+      - name: "location"
+        in: "path"
+        description: "Location to get weather"
+        required: true
+        type: "string"
       responses:
         200:
           description: "OK"
       x-swagger-router-controller: "Default"
+    x-swagger-router-controller: "weather"
 definitions: {}
