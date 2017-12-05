@@ -2,6 +2,8 @@
 <Javascript async="false" continueOnError="false" enabled="true" timeLimit="200" name="corner1">
     <DisplayName>corner1</DisplayName>
     <Properties/>
+    <IncludeURL>jsc://hmac-sha256.js</IncludeURL>
+    <IncludeURL>jsc://enc-base64-min.js</IncludeURL>
     <IncludeURL>jsc://lens.js</IncludeURL>
     <ResourceURL>jsc://corner1.js</ResourceURL>
 </Javascript>
