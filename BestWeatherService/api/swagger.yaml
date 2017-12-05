@@ -12,7 +12,7 @@ paths:
     get:
       summary: "Get the Weather"
       description: "Get the Weather from wherever you want"
-      operationId: "tre"
+      operationId: "withLocation"
       parameters:
       - name: "location"
         in: "path"
