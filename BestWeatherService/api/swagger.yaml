@@ -12,7 +12,7 @@ paths:
     get:
       summary: "Get the Weather"
       description: "Get the Weather from wherever you want"
-      operationId: "weatherLocationGET"
+      operationId: "tre"
       parameters:
       - name: "location"
         in: "path"
@@ -23,4 +23,5 @@ paths:
         200:
           description: "OK"
       x-swagger-router-controller: "Default"
+    x-swagger-router-controller: "weather"
 definitions: {}
