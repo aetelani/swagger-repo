@@ -8,7 +8,7 @@
  * location String Location to get weather
  * no response value expected for this operation
  **/
-exports.weatherLocationGET = function(location) {
+exports.tre = function(location) {
   return new Promise(function(resolve, reject) {
     resolve();
   });

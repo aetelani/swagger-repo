@@ -3,9 +3,9 @@
 var utils = require('../utils/writer.js');
 var Default = require('../service/DefaultService');
 
-module.exports.weatherLocationGET = function weatherLocationGET (req, res, next) {
+module.exports.tre = function tre (req, res, next) {
   var location = req.swagger.params['location'].value;
-  Default.weatherLocationGET(location)
+  Default.tre(location)
     .then(function (response) {
       utils.writeJson(res, response);
     })
