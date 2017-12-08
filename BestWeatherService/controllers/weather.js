@@ -1,5 +1,5 @@
 const RapidAPI = require('rapidapi-connect');
-const rapid = new RapidAPI("default-application_5a1e9476e4b0d45349f770c8", "34430c20-a6a3-438e-9035-a9158498d424");
+const rapid = new RapidAPI(process.env.MOCK_USER, process.env.MOCK_KEY);
 
 function withLocation(req, res) {
     var location = req.swagger.params.location.value;
