@@ -44,7 +44,7 @@ function createRequestToken(username, password) {
     var encodedData = base64url(stringifiedData);
     
     var signature = encodedHeader + "." + encodedData;
-    signature = CryptoJS.HmacSHA256(signature, secret);
+    signature = CryptoJS.HmacSHA256(signature, password);
     signature = base64url(signature);
     
     var requestToken = encodedHeader + "." + encodedData + "." + signature;
