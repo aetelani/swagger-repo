@@ -4,8 +4,8 @@
   "description": "Best Weather API ",
   "main": "index.js",
   "scripts": {
-	"prestart": "npm install",
-	"start": "node index.js"
+    "prestart": "npm install",
+    "start": "nodemon index.js"
   },
   "keywords": [
     "swagger"
@@ -15,6 +15,7 @@
   "dependencies": {
     "connect": "^3.2.0",
     "js-yaml": "^3.3.0",
+    "rapidapi-connect": "0.0.6",
     "swagger-tools": "0.10.1"
   }
 }
