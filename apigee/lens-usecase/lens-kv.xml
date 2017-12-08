@@ -1,0 +1,19 @@
+<?xml version="1.0" encoding="UTF-8" standalone="yes"?>
+<KeyValueMapOperations async="false" continueOnError="false" enabled="true" name="Lens-KV" mapIdentifier="lens">
+    <DisplayName>Lens-KV</DisplayName>
+    <Properties/>
+    <ExclusiveCache>false</ExclusiveCache>
+    <ExpiryTimeInSecs>300</ExpiryTimeInSecs>
+    <InitialEntries/>
+    <Get assignTo="private.username" index="1">
+        <Key>
+            <Parameter ref="username"/>
+        </Key>
+    </Get>
+    <Get assignTo="private.password" index="1">
+        <Key>
+            <Parameter ref="password"/>
+        </Key>
+    </Get>
+    <Scope>environment</Scope>
+</KeyValueMapOperations>
