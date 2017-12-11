@@ -7,12 +7,12 @@
     <InitialEntries/>
     <Get assignTo="private.username" index="1">
         <Key>
-            <Parameter ref="username"/>
+	    <Parameter>username</Parameter>
         </Key>
     </Get>
     <Get assignTo="private.password" index="1">
         <Key>
-            <Parameter ref="password"/>
+            <Parameter>password</Parameter> 
         </Key>
     </Get>
     <Scope>environment</Scope>
