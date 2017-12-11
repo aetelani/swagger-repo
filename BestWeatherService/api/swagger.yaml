@@ -23,5 +23,5 @@ paths:
         200:
           description: "OK"
       x-swagger-router-controller: "Default"
-    x-swagger-router-controller: "weather1"
+    x-swagger-router-controller: "weather"
 definitions: {}
