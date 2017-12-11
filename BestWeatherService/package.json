@@ -1,0 +1,21 @@
+{
+  "name": "best-weather-api",
+  "version": "1.0.2",
+  "description": "Best Weather API ",
+  "main": "index.js",
+  "scripts": {
+    "prestart": "npm install",
+    "start": "nodemon index.js"
+  },
+  "keywords": [
+    "swagger"
+  ],
+  "license": "Apache-2.0",
+  "private": true,
+  "dependencies": {
+    "connect": "^3.2.0",
+    "js-yaml": "^3.3.0",
+    "rapidapi-connect": "0.0.6",
+    "swagger-tools": "0.10.1"
+  }
+}
