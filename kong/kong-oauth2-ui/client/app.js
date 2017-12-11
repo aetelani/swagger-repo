@@ -71,7 +71,7 @@ app.get("/send-jwt", function(req, res) {
 			'Hosts': 'poc',
 //			'Authorization: Bearer ' + token,
 		},
-		forms: {
+		form: {
 			'access_token': token,
 		},
 		qs: {
