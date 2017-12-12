@@ -2,7 +2,7 @@
 swagger: "2.0"
 info:
   description: "Best Weather API\n"
-  version: "1.1.0"
+  version: "1.1.1"
   title: "Best Weather API"
 schemes:
 - "https"
@@ -23,5 +23,13 @@ paths:
         200:
           description: "OK"
       x-swagger-router-controller: "Default"
-    x-swagger-router-controller: "weather"
-definitions: {}
+definitions:
+  Weather:
+    type: "object"
+    required:
+    - "location"
+    properties:
+      location:
+        type: "string"
+        format: "City"
+        example: "Tampere"
