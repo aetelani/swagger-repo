@@ -23,13 +23,4 @@ paths:
         200:
           description: "OK"
       x-swagger-router-controller: "Default"
-definitions:
-  Weather:
-    type: "object"
-    required:
-    - "location"
-    properties:
-      location:
-        type: "string"
-        format: "City"
-        example: "Tampere"
+definitions: {}
