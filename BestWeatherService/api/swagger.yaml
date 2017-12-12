@@ -4,15 +4,22 @@ info:
   description: "Best Weather API\n"
   version: "1.1.1"
   title: "Best Weather API"
+tags:
+- name: "weather"
+  description: "Weather operations"
 schemes:
 - "https"
 - "http"
 paths:
   /weather/{location}:
     get:
+      tags:
+      - "weather"
       summary: "Get the Weather"
       description: "Get the Weather from wherever you want"
       operationId: "withLocation"
+      produces:
+      - "application/json"
       parameters:
       - name: "location"
         in: "path"
@@ -22,5 +29,7 @@ paths:
       responses:
         200:
           description: "OK"
-      x-swagger-router-controller: "Default"
+        400:
+          description: "bad input parameter"
+      x-swagger-router-controller: "Weather"
 definitions: {}
